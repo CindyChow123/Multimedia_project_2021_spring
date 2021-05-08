@@ -1,0 +1,21 @@
+/* view{
+  height: 100vh;
+} */
+.navCB{
+  width: 80%;
+}
+slider{
+  padding:10rpx;
+}
+.viewSlider{
+  height: 10vh;
+}
+.navButton{
+  padding:10rpx;
+}
+text{
+  display: block;
+  text-align: center;
+  padding: 15rpx;
+  color: gray;
+}

@@ -1,0 +1,23 @@
+<!--pages/user/user.wxml-->
+<view wx:if="{{userinfo.avatarUrl}}" class="user_info_wrap">
+  <view class="user_img_wrap">
+    <image class="user_bg" src="{{userinfo.avatarUrl}}"></image>
+    <view class="user_info">
+      <image class="user_icon" src="{{userinfo.avatarUrl}}"></image>
+      <view class="user_name">{{userinfo.nickName}}</view>
+    </view>
+  </view>
+</view>
+<view wx:if="{{userinfo.avatarUrl}}" class="user_main">
+  <navigator class="navButton">
+    <button type="primary" plain="true">查看我的测试结果</button>
+  </navigator>
+  <navigator class="navButton">
+    <button type="primary" plain="true">我的作品</button>
+  </navigator>
+</view>
+<view wx:else class="user_info_wrap">
+  <view class="user_login">
+    <navigator url="/pages/login/login">请登录以查看更多</navigator>
+  </view>
+</view>

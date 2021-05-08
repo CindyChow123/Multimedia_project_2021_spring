@@ -1,0 +1,21 @@
+<!--pages/shot/shot.wxml-->
+<view class="pg_shot">
+  <camera device-position="back" flash="off" style="width:100%;height:100vh;" class="bg_camera">
+    <view class="more_wrap">
+      <navigator class="navMoreIcon">
+        <image class="switch_icon" mode="scaleToFill" src="../../icon/_more.png"></image>
+      </navigator>
+    </view>
+    <view class="shot_wrap">
+      <navigator class="navCameraIcon">
+        <image class="shot_icon" mode="scaleToFill" src="../../icon/_camera.png"></image>
+      </navigator>
+    </view>
+    <view class="switch_wrap">
+      <navigator class="navSwitchIcon">
+        <image class="switch_icon" mode="scaleToFill" src="../../icon/_switch.png"></image>
+      </navigator>
+    </view>
+  </camera>
+  
+</view>

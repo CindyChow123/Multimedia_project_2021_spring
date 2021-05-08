@@ -1,0 +1,12 @@
+<view class="pg_shot">
+  <navigator class="navCB">
+    <image class="icon" mode="widthFix" src="../../icon/colorBlindTest.jpg"></image>
+  </navigator>
+  <view class="viewSlider">
+    <slider></slider>
+  </view>
+  <text>{{text}}</text>
+  <navigator class="navButton">
+    <button type="primary" plain="true">提交测试</button>
+  </navigator>
+</view>

@@ -1,0 +1,45 @@
+/* pages/shot/shot.wxss */
+view{
+  background-color: black;
+  height: 100vh;
+}
+.bg_camera{
+  position: relative;
+}
+.shot_wrap{
+  position: absolute;
+  top:90vh;
+  height: 150rpx;
+  width: 150rpx;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  border-radius: 100%;
+}
+.switch_wrap{
+  position: absolute;
+  top:90vh;
+  height: 100rpx;
+  width: 100rpx;
+  left: 80%;
+  transform: translate(-50%,-50%);
+  border-radius: 100%;
+}
+.more_wrap{
+  position: absolute;
+  top:90vh;
+  height: 100rpx;
+  width: 100rpx;
+  left: 20%;
+  transform: translate(-50%,-50%);
+  border-radius: 100%;
+}
+.shot_icon{
+  transform: translate(25%,25%);
+  height:100rpx;
+  width:100rpx;
+}
+.switch_icon{
+  transform: translate(15%,15%);
+  height:75rpx;
+  width:75rpx;
+}
