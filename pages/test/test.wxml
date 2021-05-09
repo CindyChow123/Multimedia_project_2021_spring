@@ -1,7 +1,7 @@
 <view class="pg_shot">
-  <navigator class="navCB">
+  <view class="navCB">
     <image class="icon" mode="widthFix" src="../../icon/colorBlindTest.jpg"></image>
-  </navigator>
+  </view>
   <view class="viewSlider">
     <slider></slider>
   </view>

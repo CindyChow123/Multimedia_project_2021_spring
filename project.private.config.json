@@ -23,6 +23,12 @@
           "pathName": "pages/shot/shot",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "test",
+          "pathName": "pages/index/index",
+          "query": "",
+          "scene": null
         }
       ]
     }

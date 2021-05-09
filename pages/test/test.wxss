@@ -2,7 +2,7 @@
   height: 100vh;
 } */
 .navCB{
-  width: 80%;
+  position: relative;
 }
 slider{
   padding:10rpx;
@@ -18,4 +18,7 @@ text{
   text-align: center;
   padding: 15rpx;
   color: gray;
+}
+.icon{
+  width: 100%;
 }

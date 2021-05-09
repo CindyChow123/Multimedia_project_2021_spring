@@ -1,23 +1,16 @@
-<!--index.wxml-->
-<view class="container">
-  <view class="userinfo">
-    <block wx:if="{{canIUseOpenData}}" calss="userinfo-opendata">
-      <view class="userinfo-avatar" bindtap="bindViewTap">
-        <open-data type="userAvatarUrl"></open-data>
-      </view>
-      <open-data type="userNickName"></open-data>
-    </block>
-    <block wx:elif="{{!hasUserInfo}}">
-      <button wx:if="{{canIUseGetUserProfile}}" bindtap="getUserProfile"> 获取头像昵称 </button>
-      <button wx:elif="{{canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
-      <view wx:else> 请使用1.4.4及以上版本基础库 </view>
-    </block>
-    <block wx:else>
-      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
-      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-    </block>
-  </view>
-  <view class="usermotto">
-    <text class="user-motto">{{motto}}</text>
-  </view>
+<!--pages/index/index.wxml-->
+<view class='wrap'>
+    <button bindtap='choose'>choose image</button>
+    <!-- <button wx:if="{{selected}}" bindtap='filterTap'>filter</button> -->
+    <view wx:if="{{selected}}" class='picker-wrap'>
+        <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+            <view class="picker">
+                当前选择：{{array[index]}}
+            </view>
+        </picker>
+    </view>
+    <view class='time' wx:if="{{gap}}">Processing time:{{gap}}ms</view>
 </view>
+<canvas canvas-id='hehe' style='margin:0 auto;width:320px; height:320px; border:1px solid #ddd;'></canvas>
+
+<button wx:if="{{selected}}" bindtap='save' class='save'>save</button>

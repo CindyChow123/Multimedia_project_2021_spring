@@ -11,6 +11,7 @@
 .user_bg{
   height: 50vh;
   filter: blur(10rpx);
+  width: 100%;
 }
 .user_info{
   position: absolute;
