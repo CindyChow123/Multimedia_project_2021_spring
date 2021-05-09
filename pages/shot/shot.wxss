@@ -43,3 +43,7 @@ view{
   height:75rpx;
   width:75rpx;
 }
+.viewMoreIcon{
+  height: auto;
+  width: auto;
+}

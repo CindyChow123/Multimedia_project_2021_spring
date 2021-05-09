@@ -5,66 +5,29 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    savePath:null,
+    dp:'back'
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-    const context = wx.createCameraContext()
-    const listener = context.onCameraFrame((frame) => {
-      console.log(frame.data instanceof ArrayBuffer, frame.width, frame.height)
+  handleShot(){
+    const context = wx.createCameraContext();
+    context.takePhoto({
+      success: (res) => {
+        this.savePath = res.tempImagePath;
+        console.log(this.savePath);
+      },
+      fail: (res)=>{
+        console.log('fail');
+      }
     })
-    listener.start()
+    const listener = context.onCameraFrame((frame) => {
+      console.log(frame.width);
+    })
   },
 
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
+  handleSwitch(){
+    if (this.dp=='back') this.dp='front';
+    else this.dp='back';
+    console.log(this.dp);
   }
 })

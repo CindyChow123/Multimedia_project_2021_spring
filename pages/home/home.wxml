@@ -10,11 +10,14 @@
         </block>
       </swiper-item>
     </swiper>
-    <navigator class="navButton" url="../../pages/test/test">
-      <button type="primary" plain="true">测试</button>
+    <navigator class="navButton" url="../../pages/shot/shot">
+      <button type="primary" plain="true">他们眼中的世界</button>
     </navigator>
     <navigator class="navButton" url="../../pages/shot/shot">
-      <button type="primary" plain="true">拍照</button>
+      <button type="primary" plain="true">色彩辅助相机</button>
+    </navigator>
+    <navigator class="navButton" url="../../pages/shot/shot">
+      <button type="primary" plain="true">自定义滤镜相机</button>
     </navigator>
   </view>
 </view>

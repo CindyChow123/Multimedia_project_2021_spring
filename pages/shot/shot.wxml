@@ -1,20 +1,14 @@
 <!--pages/shot/shot.wxml-->
 <view class="pg_shot">
-  <camera device-position="back" flash="off" style="width:100%;height:100vh;" class="bg_camera">
+  <camera flash="off" style="width:100%;height:100vh;" class="bg_camera" device-position="{{dp}}">
     <view class="more_wrap">
-      <navigator class="navMoreIcon">
-        <image class="switch_icon" mode="scaleToFill" src="../../icon/_more.png"></image>
-      </navigator>
+      <image class="switch_icon" mode="scaleToFill" src="../../icon/_more.png"></image>
     </view>
-    <view class="shot_wrap">
-      <navigator class="navCameraIcon">
-        <image class="shot_icon" mode="scaleToFill" src="../../icon/_camera.png"></image>
-      </navigator>
+    <view class="shot_wrap" bindtap="handleShot">
+      <image class="shot_icon" mode="scaleToFill" src="../../icon/_camera.png"></image>
     </view>
-    <view class="switch_wrap">
-      <navigator class="navSwitchIcon">
-        <image class="switch_icon" mode="scaleToFill" src="../../icon/_switch.png"></image>
-      </navigator>
+    <view class="switch_wrap" bindtap="handleSwitch">
+      <image class="switch_icon" mode="scaleToFill" src="../../icon/_switch.png"></image>
     </view>
   </camera>
   
