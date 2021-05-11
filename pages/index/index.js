@@ -213,6 +213,7 @@ Page({
             success: function (res) {
                 if (res.tempFilePaths.length) {
                     let path = res.tempFilePaths[0]
+                    console.log(path)
 
                     // z.getImageAspectFitSize(path)
 

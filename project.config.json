@@ -40,7 +40,7 @@
     "minifyWXSS": true
   },
   "compileType": "miniprogram",
-  "libVersion": "2.0.4",
+  "libVersion": "2.7.7",
   "appid": "wx045dbd80bfe7243a",
   "projectname": "Viqual",
   "debugOptions": {
