@@ -59,7 +59,7 @@ const filters = {
         // ImageFilters.ColorTransformFilter (srcImageData, redMultiplier, greenMultiplier, blueMultiplier, alphaMultiplier, redOffset, greenOffset, blueOffset, alphaOffset)
         // redMultiplier, greenMultiplier, blueMultiplier, alphaMultiplier: 0~5
         // redOffset, greenOffset, blueOffset, alphaOffset: 0~255
-
+        // console.log(data)
         return ImageFilters.ColorTransformFilter(data, 20, 1, 1, 1, 38, 0, 0, 0)
     },
     Desaturate: function (data) {

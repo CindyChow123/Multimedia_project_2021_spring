@@ -1,4 +1,11 @@
 // pages/shot/shot.js
+const ImageFilters = require('../../utils/weImageFilters/weImageFilters.js')
+const Helper = require('../../utils/weImageFilters/weImageFiltersHelper.js')
+let helper = new Helper({
+  canvasId: 'hehe',
+  width: 320,
+  height: 320
+})
 Page({
 
   /**
@@ -13,6 +20,7 @@ Page({
   },
 
   handleShot(){
+    var data
     const context = wx.createCameraContext()
     context.takePhoto({
       success: (res) => {
@@ -32,7 +40,24 @@ Page({
       var r = dataview.getInt8(i*4)
       var g = dataview.getInt8(i*4+1)
       var b = dataview.getInt8(i*4+2)
-      
+      data = new Uint8ClampedArray(frame.data)
+      var info = {'height':frame.height,'width':frame.width,'data':data}
+      // console.log(info)
+      let startTime = (new Date()).getTime()
+      // let imageData = helper.createImageData()
+      // console.log(imageData)
+      let filtered = ImageFilters.ColorTransformFilter(info, 20, 1, 1, 1, 38, 0, 0, 0)
+
+      helper.putImageData(filtered, () => {
+          wx.hideLoading()
+
+          let endTime = (new Date()).getTime()
+          let gap = (endTime - startTime)
+
+          this.setData({
+              gap
+          })
+      })
     })
     listener.start()
     listener.stop()
