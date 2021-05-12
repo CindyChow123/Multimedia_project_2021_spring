@@ -1,7 +1,7 @@
 /* pages/index/index.wxss */
-.wrap {
-    height: 300rpx;
-}
+/* .wrap {
+    height: 20vh;
+} */
 
 .picker-wrap {
     width: 750rpx;

@@ -1,0 +1,10 @@
+<!--pages/shot/shot.wxml-->
+<view class="bg_wrap">
+  <canvas canvas-id='pic'></canvas>
+  <view class="back_wrap" bindtap="handleBack">
+    <image class="back_icon" mode="scaleToFill" src="../../icon/_back.png"></image>
+  </view>
+  <view class="forward_wrap" bindtap="handleForward">
+    <image class="forward_icon" mode="scaleToFill" src="../../icon/_forward.png"></image>
+  </view>
+</view>

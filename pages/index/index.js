@@ -3,7 +3,7 @@ const ImageFilters = require('../../utils/weImageFilters/weImageFilters.js')
 const Helper = require('../../utils/weImageFilters/weImageFiltersHelper.js')
 
 let helper = new Helper({
-    canvasId: 'hehe',
+    canvasId: 'transform',
     width: 320,
     height: 320
 })
@@ -178,6 +178,14 @@ Page({
     onLoad: function (options) {
         this.setData({
             array: keys
+        })
+        const eventChann = this.getOpenerEventChannel()
+        eventChann.on('getUrl',function(data){
+            helper.initCanvas(data.data, () => {
+                z.setData({
+                    selected: 1
+                })
+            })
         })
     },
     bindPickerChange(e) {
