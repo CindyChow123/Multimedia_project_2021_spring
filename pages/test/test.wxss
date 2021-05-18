@@ -2,7 +2,8 @@
   height: 100vh;
 } */
 .navCB{
-  position: relative;
+  height: 70vh;
+  width: 100vh;
 }
 slider{
   padding:10rpx;
@@ -20,5 +21,11 @@ text{
   color: gray;
 }
 .icon{
+  width: 60vh;
+  display: block;
+  transform: translate(2%,10%);
+}
+.test_pic {
   width: 100%;
+  height: 100%;
 }

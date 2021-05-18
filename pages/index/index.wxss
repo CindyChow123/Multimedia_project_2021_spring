@@ -2,7 +2,10 @@
 /* .wrap {
     height: 20vh;
 } */
-
+page{
+    background-color: black;
+    height: 100vh;
+}
 .picker-wrap {
     width: 750rpx;
     height: 88rpx;
@@ -32,6 +35,50 @@
     font-size: 30rpx;
 }
 
-.save {
-    margin-top: 30rpx;
+.transform_wrap{
+    position: relative;
+    width: 280px;
+    height: 80vh;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+}
+.transform {
+    position: absolute;
+    top:5vh;
+    width: 320px;
+    height: 80vh;
+}
+.save_icon{
+    transform: translateY(15%);
+    height:50rpx;
+    width:50rpx;
+}
+.save{
+    position: absolute;
+    bottom: 0;
+    height: 6vh;
+    width: 100vh;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color:rgb(49, 46, 46);
+}
+.scroll_wrap{
+    position: relative;
+}
+.scroll-view{
+    white-space: nowrap;
+    width: 100vh;
+    margin: 20rpx 40rpx 0 40rpx;
+}
+.scroll-img{
+    display: inline-block;
+    width: 12%;
+    height: 10vh;
+}
+.img{
+    width: 8vh;
+    height: 8vh;
 }

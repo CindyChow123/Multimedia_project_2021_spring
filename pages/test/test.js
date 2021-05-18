@@ -1,66 +1,40 @@
 // pages/test/test.js
 const text = '请将滑块滑至能看清数字的位置'
+const ImageFilters = require('../../utils/weImageFilters/weImageFilters.js')
+const Helper = require('../../utils/weImageFilters/weImageFiltersHelper.js')
+let helper = new Helper({
+  canvasId: 'test_pic',
+  width: 420,
+  height: 420
+})
 Page({
   /**
    * 页面的初始数据
    */
   data: {
-    text
+    text,
+    finish: false
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    // wx.getImageInfo({
+    //   src: "icon/colorBlindTest.jpg",
+    //   success (res) {
+    //     res.canvasId = 'test_pic';
+    //     res.tempFilePath = "icon/colorBlindTest.jpg";
+    //     console.log(res);
+    //     helper.updateCanvasInfo(res);
+    //     console.log(helper);
+    //   }
+    // })
+    // let path = "icon/colorBlindTest.jpg"
+    // helper.initCanvas(path)
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
+  slide_change: function(event) {
+    console.log(event)
   }
 })

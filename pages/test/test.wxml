@@ -1,12 +1,17 @@
 <view class="pg_shot">
   <view class="navCB">
-    <image class="icon" mode="widthFix" src="../../icon/colorBlindTest.jpg"></image>
+    <canvas canvas-id='test_pic' class="test_pic">
+      <image class="icon" mode="widthFix" src="./icon/colorBlindTest.jpg"></image>
+    </canvas>
   </view>
   <view class="viewSlider">
-    <slider></slider>
+    <slider min="0" max="100" show-value="true" bindchange="slide_change"></slider>
   </view>
   <text>{{text}}</text>
-  <navigator class="navButton">
+  <navigator class="navButton" wx:if="{{finish}}">
     <button type="primary" plain="true">提交测试</button>
+  </navigator>
+  <navigator class="navButton" wx:else>
+    <button type="primary" plain="true">下一步</button>
   </navigator>
 </view>

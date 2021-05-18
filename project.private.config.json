@@ -29,6 +29,11 @@
           "pathName": "pages/index/index",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "scroll",
+          "pathName": "pages/function/function",
+          "scene": null
         }
       ]
     }

@@ -1,6 +1,7 @@
 // pages/index/index.js
 const ImageFilters = require('../../utils/weImageFilters/weImageFilters.js')
 const Helper = require('../../utils/weImageFilters/weImageFiltersHelper.js')
+const order = ['demo1', 'demo2', 'demo3']
 
 let helper = new Helper({
     canvasId: 'transform',
@@ -174,18 +175,59 @@ Page({
         array: [],
         index: 0,
         gap: 0,
+        img_lst: [
+            {
+              img_id:0,
+              img_src:"../home/img/swipe_ncv.png"
+            },
+            {
+              img_id:1,
+              img_src:"../home/img/swipe_acb.png"
+            },
+            {
+              img_id:2,
+              img_src:"../home/img/swipe_dcb.png"
+            },
+            {
+              img_id:3,
+              img_src:"../home/img/swipe_pcb.png"
+            }
+        ],
+        toView: 'green'
     },
     onLoad: function (options) {
+        const z = this;
         this.setData({
             array: keys
         })
         const eventChann = this.getOpenerEventChannel()
         eventChann.on('getUrl',function(data){
-            helper.initCanvas(data.data, () => {
+            wx.getSystemInfo({
+              success: (result) => {
+                let h = data.height;
+                let w = data.width;
+                if (data.height > result.screenHeight) {
+                    h = result.screenHeight-100
+                }
+                if (data.width > result.screenWidth) {
+                    w = result.screenWidth
+                }
+                // console.log("data:",data);
+                // console.log("result:",result);
+                const option = {
+                    tempFilePath:data.path,
+                    canvasId:'transform',
+                    width:280,
+                    height:280*(result.screenHeight/result.screenWidth)
+                }
+                // console.log(option)
+                helper.updateCanvasInfo(option) 
                 z.setData({
                     selected: 1
                 })
+              },
             })
+            
         })
     },
     bindPickerChange(e) {
@@ -256,8 +298,27 @@ Page({
                     wx.showToast({
                         title: '保存成功',
                     })
+                },
+                fail: res => {
+                    console.log('fail:',res);
                 }
             })
+        })
+    },
+    tap() {
+        for (let i = 0; i < order.length; ++i) {
+          if (order[i] === this.data.toView) {
+            this.setData({
+              toView: order[i + 1],
+              scrollTop: (i + 1) * 200
+            })
+            break
+          }
+        }
+    },
+    tapMove() {
+        this.setData({
+          scrollTop: this.data.scrollTop + 10
         })
     }
 })

@@ -1,3 +1,16 @@
 .navButton{
-  padding:20rpx;
+  position: absolute;
+  text-align: center;
+  transform: translate(-18%,-15%);
+  top: 45%;
+  left:30%;
+}
+.choose_button{
+  width: 500rpx;
+  height: 300rpx;
+  line-height: 300rpx;
+  display: inline-block;
+}
+.home_swiper{
+  height: 400rpx;
 }

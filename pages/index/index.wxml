@@ -1,15 +1,34 @@
 <!--pages/index/index.wxml-->
-<view class='wrap'>
-    <!-- <button wx:if="{{selected}}" bindtap='filterTap'>filter</button> -->
+<!-- <view class='wrap'>
+    <button bindtap='choose'>choose image</button> -->
+    <!-- <button wx:if="{{selected}}" bindtap='filterTap'>filter</button>
     <view class='picker-wrap'>
         <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
             <view class="picker">
-                当前选择：{{array[index]}}
+                点击选择模式：{{array[index]}}
             </view>
         </picker>
     </view>
     <view class='time' wx:if="{{gap}}">Processing time:{{gap}}ms</view>
+</view> -->
+<view class="transform_wrap">
+    <canvas canvas-id='transform' class='transform'></canvas>
 </view>
-<canvas canvas-id='transform' style='width:100vh; height:100vh; border:1px solid #ddd;'></canvas>
-
-<button wx:if="{{selected}}" bindtap='save' class='save'>save</button>
+<!-- <view class="imgs" style="height:20vh;position:absolute;">
+    <scroll-view class="scroll-img" scroll-x="true" bindscroll="scroll" style="width: 100%">
+        <view wx:for="{{img_lst}}" wx:key="img_id">
+           <image mode="scaleToFill" style="display:inline-block;width: 100%;height:100%" src="{{item.img_src}}"></image> 
+        </view>
+    </scroll-view>
+</view> -->
+<view class="scroll_wrap">
+    <scroll-view class="scroll-view" scroll-x="true">
+        <view wx:for="{{img_lst}}" wx:key="img_id" class="scroll-img">
+           <image mode="scaleToFill" src="{{item.img_src}}" class="img"></image> 
+        </view>
+    </scroll-view>
+</view>
+<button wx:if="{{selected}}" bindtap='save' class='save'>
+    <image class="save_icon" mode="scaleToFill" src="../../icon/_download.png"></image>
+</button>
+<!-- <button wx:if="{{selected}}" bindtap='save' class='save'>save</button> -->

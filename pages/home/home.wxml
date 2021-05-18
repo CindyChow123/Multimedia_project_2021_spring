@@ -1,23 +1,15 @@
 <!--pages/home/home.wxml-->
 <view class="pg_home">
   <view class="home_swiper" >
-    <swiper autoplay indicator-dots circular>
+    <swiper autoplay indicator-dots circular class="home_swiper">
       <swiper-item
       wx:for="{{swiperList}}"
       wx:key="img_id">
-        <block>
-          <image mode="scaleToFill" style="width: 100%;height:100%" src="{{item.img_src}}"></image>
-        </block>
+        <image mode="scaleToFill" style="width: 100%;height:100%" src="{{item.img_src}}"></image>
       </swiper-item>
     </swiper>
-    <navigator class="navButton" url="../../pages/shot/shot">
-      <button type="primary" plain="true">他们眼中的世界</button>
-    </navigator>
-    <navigator class="navButton" url="../../pages/shot/shot">
-      <button type="primary" plain="true">色彩辅助相机</button>
-    </navigator>
-    <navigator class="navButton" url="../../pages/shot/shot">
-      <button type="primary" plain="true">自定义滤镜相机</button>
-    </navigator>
+    <view class="navButton">
+      <button bindtap='choose' class="choose_button" type="primary" plain="true">Choose a picture</button>
+    </view>
   </view>
 </view>

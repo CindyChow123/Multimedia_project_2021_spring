@@ -1,9 +1,9 @@
 <!--pages/shot/shot.wxml-->
 <view class="bg_wrap">
     <camera frame-size="small"></camera>
-    <!-- <view class="more_wrap">
+    <view class="more_wrap">
       <image class="switch_icon" mode="scaleToFill" src="../../icon/_more.png"></image>
-    </view> -->
+    </view>
     <view class="shot_wrap" bindtap="handleShot">
       <image class="shot_icon" mode="scaleToFill" src="../../icon/_camera.png"></image>
     </view>
