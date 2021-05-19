@@ -24,10 +24,10 @@ Page({
       success: (result) => {
         const syswid=result.windowWidth;
         wx.getImageInfo({
-          src: "icon/CBT3.jpg",
+          src: "icon/CBT2.jpg",
           success (res) {
             res.canvasId = 'test_pic';
-            res.tempFilePath = "icon/CBT3.jpg";
+            res.tempFilePath = "icon/CBT2.jpg";
             res.height=Math.floor(syswid*(res.height/res.width))
             res.width=syswid;
             console.log(res);
@@ -49,9 +49,9 @@ Page({
       title: '正在加载...',
       mask: true
     })
-    console.log("ori:",imageData.data);
-    let transformed = ImageFilters.Correct(imageData,0,event.detail.value/100)
-    console.log("trans:",transformed.data);
+    // console.log("ori:",imageData.data);
+    let transformed = ImageFilters.Correct(imageData,event.detail.value/100,0)
+    // console.log("trans:",transformed.data);
     helper.putImageData(transformed,()=>{
       wx.hideLoading()
     })

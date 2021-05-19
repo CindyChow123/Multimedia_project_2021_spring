@@ -2183,31 +2183,23 @@ ImageFilters.Correct = function(srcImageData,pdegree,ddegree) {
         dstImageData = this.utils.createImageData(srcWidth, srcHeight),
         dstPixels = dstImageData.data;
 
-        var rgbToLms = this.utils.rgbToLms;
-        var lmsToRgb = this.utils.lmsToRgb;
-        var l, m, s, lms, rgb, i, l_, m_, s_;
+        var r, g, b, i, r_, g_, b_;
     
         for (i = 0; i < srcLength; i += 4) {
-            // convert to lms
-            lms = rgbToLms(srcPixels[i], srcPixels[i + 1], srcPixels[i + 2]);
-    
-            // correct
-            l = lms[0];
-            m = lms[1];
-            s = lms[2];
+            r = srcPixels[i];
+            g = srcPixels[i + 1];
+            b = srcPixels[i + 2];
+            
             let trans1 = [1 - ddegree/2, ddegree/2, 0];
             let trans2 = [pdegree/2, 1 - pdegree/2, 0];
             let trans3 = [pdegree/4, ddegree/4, 1 - (pdegree + ddegree)/4];
-            l_ = l*trans1[0]+m*trans1[1]+s*trans1[2]
-            m_ = l*trans2[0]+m*trans2[1]+s*trans2[2]
-            s_ = l*trans3[0]+m*trans3[1]+s*trans3[2]
+            r_ = r*trans1[0]+g*trans1[1]+b*trans1[2]
+            g_ = r*trans2[0]+g*trans2[1]+b*trans2[2]
+            b_ = r*trans3[0]+g*trans3[1]+b*trans3[2]
     
-            // convert back to rgb
-            rgb = lmsToRgb(l_, m_, s_);
-    
-            dstPixels[i] = rgb[0];
-            dstPixels[i + 1] = rgb[1];
-            dstPixels[i + 2] = rgb[2];
+            dstPixels[i] = r_;
+            dstPixels[i + 1] = g_;
+            dstPixels[i + 2] = b_;
             dstPixels[i + 3] = srcPixels[i + 3];
         }
     
