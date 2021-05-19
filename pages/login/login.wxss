@@ -1,5 +1,0 @@
-/* pages/login/login.wxss */
-button{
-  padding:20rpx;
-  width: 70%;
-}

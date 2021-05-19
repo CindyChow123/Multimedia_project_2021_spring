@@ -30,9 +30,9 @@ Page({
             res.tempFilePath = "icon/CBT2.jpg";
             res.height=Math.floor(syswid*(res.height/res.width))
             res.width=syswid;
-            console.log(res);
+            // console.log(res);
             helper.updateCanvasInfo(res);
-            console.log(helper);
+            // console.log(helper);
           }
         })
       },
@@ -50,7 +50,7 @@ Page({
       mask: true
     })
     // console.log("ori:",imageData.data);
-    let transformed = ImageFilters.Correct(imageData,event.detail.value/100,0)
+    let transformed = ImageFilters.TritSim(imageData,event.detail.value/100)
     // console.log("trans:",transformed.data);
     helper.putImageData(transformed,()=>{
       wx.hideLoading()

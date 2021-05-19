@@ -7,7 +7,6 @@
     "pages/shot/shot",
     "pages/confirm/confirm",
     "pages/test/test",
-    "pages/login/login",
     "pages/logs/logs"
   ],
   "window":{

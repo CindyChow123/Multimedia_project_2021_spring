@@ -7,8 +7,22 @@ Page({
   data: {
     userinfo:{}
   },
-  onShow() {
+  handleGetUserInfo(e){
+    // console.log(e);
+    const {userInfo} = e.detail;
+    wx.setStorage({
+      data: userInfo,
+      key: 'userInfo',
+    })
     const userinfo=wx.getStorageSync('userInfo');
     this.setData({userinfo});
+  },
+  handleLogout(){
+    wx.removeStorage({
+      key: 'userInfo',
+    })
+    this.setData({
+      userinfo: null
+    })
   }
 })

@@ -274,20 +274,47 @@ Page({
         })
     },
     save() {
-        helper.getImageTempFilePath(tempFilePath => {
-            // 保存到相册
-            wx.saveImageToPhotosAlbum({
-                filePath: tempFilePath,
-                success: res => {
-                    wx.showToast({
-                        title: '保存成功',
-                    })
-                },
-                fail: res => {
-                    console.log('fail:',res);
+        wx.getSetting({
+            success(res) {
+                // console.log("get set:",res)
+                wx.authorize({
+                scope: 'scope.writePhotosAlbum',
+                    success (res) {
+                        console.log("save suc:",res)
+                        helper.getImageTempFilePath(tempFilePath => {
+                            // console.log(tempFilePath);
+                            // 保存到相册
+                            wx.saveImageToPhotosAlbum({
+                                filePath: tempFilePath,
+                                success: res => {
+                                    wx.showToast({
+                                        title: '保存成功',
+                                    })
+                                },
+                                fail: res => {
+                                    console.log('fail:',res);
+                                }
+                            })
+                        })
+                    },
+                    fail (res) {
+                        wx.showModal({
+                            content: '是否开放相册权限？',
+                            success (res) {
+                                if (res.confirm) {
+                                    wx.openSetting({
+                                        fail (res) {
+                                            console.log('Fail to open setting!')
+                                        }
+                                    })
+                                }
+                            }
+                        })
+                    }
+                })
                 }
-            })
-        })
+            }
+          )        
     },
     tap() {
         for (let i = 0; i < order.length; ++i) {

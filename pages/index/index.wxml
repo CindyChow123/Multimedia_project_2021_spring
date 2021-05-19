@@ -14,13 +14,6 @@
 <view class="transform_wrap">
     <canvas canvas-id='transform' class='transform'></canvas>
 </view>
-<!-- <view class="imgs" style="height:20vh;position:absolute;">
-    <scroll-view class="scroll-img" scroll-x="true" bindscroll="scroll" style="width: 100%">
-        <view wx:for="{{img_lst}}" wx:key="img_id">
-           <image mode="scaleToFill" style="display:inline-block;width: 100%;height:100%" src="{{item.img_src}}"></image> 
-        </view>
-    </scroll-view>
-</view> -->
 <view class="scroll_wrap">
     <scroll-view class="scroll-view" scroll-x="true">
         <view wx:for="{{img_lst}}" wx:key="img_id" class="scroll-img">

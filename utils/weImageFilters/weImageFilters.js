@@ -2143,8 +2143,8 @@ ImageFilters.TritSim = function(srcImageData,degree) {
 
         var rgbToLms = this.utils.rgbToLms;
         var lmsToRgb = this.utils.lmsToRgb;
-        var l, m, s, lms, rgb, i, l_, m_, s_;
-        console.log("ori:",srcPixels);
+        var l, m, s, lms, rgb, i;
+        // console.log("ori:",srcPixels);
     
         for (i = 0; i < srcLength; i += 4) {
             // convert to lms
@@ -2155,23 +2155,18 @@ ImageFilters.TritSim = function(srcImageData,degree) {
             m = lms[1];
             s = lms[2];
             let trans3 = [-0.395913 * degree, 0.801109 * degree, 1 - degree];
-            // l_ = l+0+s*trans3[0]
-            // m_ = 0+m+s*trans3[1]
-            // s_ = 0+0+s*trans3[2]
-            l_ = l
-            m_ = m
-            s_ = l*trans3[0]+m*trans3[1]+s*trans3[2]
+            s = l*trans3[0]+m*trans3[1]+s*trans3[2]
 
     
             // convert back to rgb
-            rgb = lmsToRgb(l_, m_, s_);
+            rgb = lmsToRgb(l, m, s);
     
             dstPixels[i] = rgb[0];
             dstPixels[i + 1] = rgb[1];
             dstPixels[i + 2] = rgb[2];
             dstPixels[i + 3] = srcPixels[i + 3];
         }
-        console.log(dstImageData);
+        // console.log(dstImageData);
         return dstImageData;
 }
 

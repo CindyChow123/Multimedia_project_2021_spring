@@ -28,40 +28,56 @@ Page({
   choose(e) {
     const Type = e.currentTarget.dataset.type;
     const z = this
-    wx.chooseImage({
-        count: 1,
-        success: function (res) {
-            if (res.tempFilePaths.length) {
-                let path = res.tempFilePaths[0]
-                // console.log(path)
-                wx.getImageInfo({
-                  src: path,
-                  success (res) {
-                    const img = res;
-                    // console.log(img)
-                    wx.navigateTo({
-                      url: '/pages/index/index',
-                      success: function(res) {
-                        res.eventChannel.emit('getUrl',{path:img.path,width:img.width,height:img.height,type:Type});
-                      },
-                      fail: function(res){
-                        console.log('Choose Picture Fail!')
-                      }
-                    })
-                  }
-                })
-                
+    const userinfo=wx.getStorageSync('userInfo');
+    if (Type=="diy" || Type=="help") {
+      if (userinfo) {
+        console.log("yes");
+        z.handleImage(Type);
+      }else{
+        wx.showModal({
+          content: '登录以使用更多功能',
+          success (res) {
+            // console.log(res);
+            if (res.confirm==true) {
+              // console.log('yes');
+              wx.switchTab({
+                url: '/pages/user/user'
+              })
             }
-        },
-    })
-  },
-  handleForward: function(){
-    const t = this
-    wx.navigateTo({
-      url: '/pages/index/index',
-      success: function(res){
-        res.eventChannel.emit('getUrl',{data:t.data.path})
+          }
+        })
       }
+    }else{
+      this.handleImage(Type);
+    }
+    
+  },
+  handleImage: function(Type){
+    wx.chooseImage({
+      count: 1,
+      success: function (res) {
+          if (res.tempFilePaths.length) {
+              let path = res.tempFilePaths[0]
+              // console.log(path)
+              wx.getImageInfo({
+                src: path,
+                success (res) {
+                  const img = res;
+                  // console.log(img)
+                  wx.navigateTo({
+                    url: '/pages/index/index',
+                    success: function(res) {
+                      res.eventChannel.emit('getUrl',{path:img.path,width:img.width,height:img.height,type:Type});
+                    },
+                    fail: function(res){
+                      console.log('Choose Picture Fail!')
+                    }
+                  })
+                }
+              })
+              
+          }
+      },
     })
   }
 
