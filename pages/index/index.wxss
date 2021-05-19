@@ -47,17 +47,21 @@ page{
 }
 .transform {
     position: absolute;
-    top:5vh;
     width: 320px;
     height: 80vh;
 }
 .save_icon{
-    transform: translateY(15%);
-    height:50rpx;
-    width:50rpx;
+    position: absolute;
+    height:40rpx;
+    width:40rpx;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
+    margin:auto;
 }
 .save{
-    position: absolute;
+    position: relative;
     bottom: 0;
     height: 6vh;
     width: 100vh;
@@ -75,10 +79,38 @@ page{
 }
 .scroll-img{
     display: inline-block;
+    position: relative;
     width: 12%;
-    height: 10vh;
+    height: 11.5vh;
+}
+.img_ctx{
+    position: relative;
+    height: 8vh;
 }
 .img{
+    position: absolute;
     width: 8vh;
     height: 8vh;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
+    margin:auto;
+}
+.img_title{
+    position: relative;
+    width: 100%;
+    height: 3.5vh;
+    text-align: center;
+}
+.img_text{
+    position: absolute;
+    color: white;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
+    margin:auto;
+    display: inline;
+    font-size: small;
 }

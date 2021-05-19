@@ -25,7 +25,8 @@ Page({
     ],
     selected: 0
   },
-  choose() {
+  choose(e) {
+    const Type = e.currentTarget.dataset.type;
     const z = this
     wx.chooseImage({
         count: 1,
@@ -41,7 +42,7 @@ Page({
                     wx.navigateTo({
                       url: '/pages/index/index',
                       success: function(res) {
-                        res.eventChannel.emit('getUrl',{path:img.path,width:img.width,height:img.height});
+                        res.eventChannel.emit('getUrl',{path:img.path,width:img.width,height:img.height,type:Type});
                       },
                       fail: function(res){
                         console.log('Choose Picture Fail!')

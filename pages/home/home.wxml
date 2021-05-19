@@ -8,8 +8,14 @@
         <image mode="scaleToFill" style="width: 100%;height:100%" src="{{item.img_src}}"></image>
       </swiper-item>
     </swiper>
-    <view class="navButton">
-      <button bindtap='choose' class="choose_button" type="primary" plain="true">Choose a picture</button>
-    </view>
+  </view>
+  <view class="navButton">
+      <button bindtap='choose' class="choose_button" type="primary" plain="true" data-type="view">预设色觉体验</button>
+  </view>
+  <view class="navButton" style="top: 58%">
+      <button bindtap='choose' class="choose_button" type="primary" plain="true" data-type="diy">自定色觉体验</button>
+  </view>
+  <view class="navButton" style="top: 71%">
+      <button bindtap='choose' class="choose_button" type="primary" plain="true" data-type="help">自动色觉增强</button>
   </view>
 </view>

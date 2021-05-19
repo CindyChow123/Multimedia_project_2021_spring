@@ -1,11 +1,11 @@
 <view class="pg_shot">
   <view class="navCB">
     <canvas canvas-id='test_pic' class="test_pic">
-      <image class="icon" mode="widthFix" src="./icon/colorBlindTest.jpg"></image>
+      <!-- <image class="icon" mode="widthFix" src="./icon/colorBlindTest.jpg"></image> -->
     </canvas>
   </view>
   <view class="viewSlider">
-    <slider min="0" max="100" show-value="true" bindchange="slide_change"></slider>
+    <slider min="0" max="100" show-value="true" bindchange="bindSlideChange"></slider>
   </view>
   <text>{{text}}</text>
   <navigator class="navButton" wx:if="{{finish}}">

@@ -175,25 +175,29 @@ Page({
         array: [],
         index: 0,
         gap: 0,
+        type: "no",
         img_lst: [
             {
               img_id:0,
-              img_src:"../home/img/swipe_ncv.png"
+              img_src:"../home/img/swipe_ncv.png",
+              img_name:"正常色觉"
             },
             {
               img_id:1,
-              img_src:"../home/img/swipe_acb.png"
+              img_src:"../home/img/swipe_acb.png",
+              img_name:"失色症"
             },
             {
               img_id:2,
-              img_src:"../home/img/swipe_dcb.png"
+              img_src:"../home/img/swipe_dcb.png",
+              img_name:"绿色盲"
             },
             {
               img_id:3,
-              img_src:"../home/img/swipe_pcb.png"
+              img_src:"../home/img/swipe_pcb.png",
+              img_name:"红色盲"
             }
         ],
-        toView: 'green'
     },
     onLoad: function (options) {
         const z = this;
@@ -204,14 +208,6 @@ Page({
         eventChann.on('getUrl',function(data){
             wx.getSystemInfo({
               success: (result) => {
-                let h = data.height;
-                let w = data.width;
-                if (data.height > result.screenHeight) {
-                    h = result.screenHeight-100
-                }
-                if (data.width > result.screenWidth) {
-                    w = result.screenWidth
-                }
                 // console.log("data:",data);
                 // console.log("result:",result);
                 const option = {
@@ -223,11 +219,12 @@ Page({
                 // console.log(option)
                 helper.updateCanvasInfo(option) 
                 z.setData({
-                    selected: 1
+                    selected: 1,
+                    type:data.type
                 })
+                // console.log("after:",z.data.type);
               },
-            })
-            
+            }) 
         })
     },
     bindPickerChange(e) {
@@ -276,19 +273,6 @@ Page({
             },
         })
     },
-    // getImageAspectFitSize(path, maxW, maxH, cb) {
-    //     wx.getImageInfo({
-    //         src: path,
-    //         success:res=>{
-    //             console.log(res)
-    //             let {width, height} = res
-
-    //             if(cb) {
-    //                 cb()
-    //             }
-    //         }
-    //     })
-    // },
     save() {
         helper.getImageTempFilePath(tempFilePath => {
             // 保存到相册
@@ -319,6 +303,24 @@ Page({
     tapMove() {
         this.setData({
           scrollTop: this.data.scrollTop + 10
+        })
+    },
+    bindImgFilter(e){
+        // console.log(e);
+        wx.showLoading({
+            title: '正在加载...',
+            mask: true
+        })
+        let path = e.currentTarget.dataset.src;
+        wx.getImageInfo({
+          src: path,
+          success (res) {
+              helper.updateCanvasInfo({tempFilePath:path});
+              wx.hideLoading();
+          },
+          fail (res) {
+              console.log('Fail to get Image Infomation.')
+          }
         })
     }
 })

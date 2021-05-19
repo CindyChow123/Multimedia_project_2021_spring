@@ -1,5 +1,13 @@
 var ImageFilters = {};
-
+const transrl1 = [17.8824, 43.5161, 4.11935]
+const transrl2 = [3.45565, 27.1554, 3.86714]
+const transrl3 = [0.0299566, 0.184309, 1.46709]
+const translr1 = [0.0809, -0.1305, 0.1167]
+const translr2 = [-0.0102, 0.0540, -0.1136]
+const translr3 = [-0.0004, -0.0041, 0.6935]
+const sim1=[1,0,0]
+const sim2=[0,1,0]
+const sim3=[0,0,1]
 
 // Filter
 ImageFilters.utils = {
@@ -182,6 +190,39 @@ ImageFilters.utils = {
         dst[dstIndex + 1] = g > 255 ? 255 : g < 0 ? 0 : g | 0;
         dst[dstIndex + 2] = b > 255 ? 255 : b < 0 ? 0 : b | 0;
         dst[dstIndex + 3] = a > 255 ? 255 : a < 0 ? 0 : a | 0;
+    },
+    /**
+     * @param r 0 <= n <= 255
+     * @param g 0 <= n <= 255
+     * @param b 0 <= n <= 255
+     * @return Array(l, m, s)
+     */
+    rgbToLms: function(r,g,b) {
+        r /= 255;
+        g /= 255;
+        b /= 255;
+
+        var l = r*transrl1[0]+g*transrl1[1]+b*transrl1[2],
+            m = r*transrl2[0]+g*transrl2[1]+b*transrl2[2],
+            s = r*transrl3[0]+g*transrl3[1]+b*transrl3[2];
+
+        return [l,m,s]
+    },
+    /**
+     * @param l 0.0 <= n <= 1.0
+     * @param m 0.0 <= n <= 1.0
+     * @param s 0.0 <= n <= 1.0
+     * @return Array(r, g, b)
+     */
+    lmsToRgb: function(l,m,s) {
+
+        var r = l*translr1[0]+m*translr1[1]+s*translr1[2],
+            g = l*translr2[0]+m*translr2[1]+s*translr2[2],
+            b = l*translr3[0]+m*translr3[1]+s*translr3[2];
+        r *= 255;
+        g *= 255;
+        b *= 255;
+        return [r,g,b]
     },
     /**
      * @param r 0 <= n <= 255
@@ -2022,5 +2063,155 @@ ImageFilters.Twril = function(srcImageData, centerX, centerY, radius, angle, edg
     return dstImageData;
 };
 
+ImageFilters.ProtSim = function(srcImageData,degree) {
+    var srcPixels = srcImageData.data,
+        srcWidth = srcImageData.width,
+        srcHeight = srcImageData.height,
+        srcLength = srcPixels.length,
+        dstImageData = this.utils.createImageData(srcWidth, srcHeight),
+        dstPixels = dstImageData.data;
+
+        var rgbToLms = this.utils.rgbToLms;
+        var lmsToRgb = this.utils.lmsToRgb;
+        var l, m, s, lms, rgb, i;
+        console.log(degree);
+        for (i = 0; i < srcLength; i += 4) {
+            // convert to lms
+            lms = rgbToLms(srcPixels[i], srcPixels[i + 1], srcPixels[i + 2]);
+    
+            // simulate
+            l = lms[0];
+            m = lms[1];
+            s = lms[2];
+            let trans1 = [1 - degree, 2.02344 * degree, -2.52581 * degree];
+            l = l*trans1[0]+m*trans1[1]+s*trans1[2]
+    
+            // convert back to rgb
+            rgb = lmsToRgb(l, m, s);
+    
+            dstPixels[i] = rgb[0];
+            dstPixels[i + 1] = rgb[1];
+            dstPixels[i + 2] = rgb[2];
+            dstPixels[i + 3] = srcPixels[i + 3];
+        }
+    
+        return dstImageData;
+}
+
+ImageFilters.DeutSim = function(srcImageData,degree) {
+    var srcPixels = srcImageData.data,
+        srcWidth = srcImageData.width,
+        srcHeight = srcImageData.height,
+        srcLength = srcPixels.length,
+        dstImageData = this.utils.createImageData(srcWidth, srcHeight),
+        dstPixels = dstImageData.data;
+
+        var rgbToLms = this.utils.rgbToLms;
+        var lmsToRgb = this.utils.lmsToRgb;
+        var l, m, s, lms, rgb, i;
+    
+        for (i = 0; i < srcLength; i += 4) {
+            // convert to lms
+            lms = rgbToLms(srcPixels[i], srcPixels[i + 1], srcPixels[i + 2]);
+    
+            // simulate
+            l = lms[0];
+            m = lms[1];
+            s = lms[2];
+            let trans2 = [0.494207 * degree, 1 - degree, 1.24827 * degree];
+            m = l*trans2[0]+m*trans2[1]+s*trans2[2]
+    
+            // convert back to rgb
+            rgb = lmsToRgb(l, m, s);
+    
+            dstPixels[i] = rgb[0];
+            dstPixels[i + 1] = rgb[1];
+            dstPixels[i + 2] = rgb[2];
+            dstPixels[i + 3] = srcPixels[i + 3];
+        }
+    
+        return dstImageData;
+}
+
+ImageFilters.TritSim = function(srcImageData,degree) {
+    var srcPixels = srcImageData.data,
+        srcWidth = srcImageData.width,
+        srcHeight = srcImageData.height,
+        srcLength = srcPixels.length,
+        dstImageData = this.utils.createImageData(srcWidth, srcHeight),
+        dstPixels = dstImageData.data;
+
+        var rgbToLms = this.utils.rgbToLms;
+        var lmsToRgb = this.utils.lmsToRgb;
+        var l, m, s, lms, rgb, i, l_, m_, s_;
+        console.log("ori:",srcPixels);
+    
+        for (i = 0; i < srcLength; i += 4) {
+            // convert to lms
+            lms = rgbToLms(srcPixels[i], srcPixels[i + 1], srcPixels[i + 2]);
+    
+            // simulate
+            l = lms[0];
+            m = lms[1];
+            s = lms[2];
+            let trans3 = [-0.395913 * degree, 0.801109 * degree, 1 - degree];
+            // l_ = l+0+s*trans3[0]
+            // m_ = 0+m+s*trans3[1]
+            // s_ = 0+0+s*trans3[2]
+            l_ = l
+            m_ = m
+            s_ = l*trans3[0]+m*trans3[1]+s*trans3[2]
+
+    
+            // convert back to rgb
+            rgb = lmsToRgb(l_, m_, s_);
+    
+            dstPixels[i] = rgb[0];
+            dstPixels[i + 1] = rgb[1];
+            dstPixels[i + 2] = rgb[2];
+            dstPixels[i + 3] = srcPixels[i + 3];
+        }
+        console.log(dstImageData);
+        return dstImageData;
+}
+
+ImageFilters.Correct = function(srcImageData,pdegree,ddegree) {
+    var srcPixels = srcImageData.data,
+        srcWidth = srcImageData.width,
+        srcHeight = srcImageData.height,
+        srcLength = srcPixels.length,
+        dstImageData = this.utils.createImageData(srcWidth, srcHeight),
+        dstPixels = dstImageData.data;
+
+        var rgbToLms = this.utils.rgbToLms;
+        var lmsToRgb = this.utils.lmsToRgb;
+        var l, m, s, lms, rgb, i, l_, m_, s_;
+    
+        for (i = 0; i < srcLength; i += 4) {
+            // convert to lms
+            lms = rgbToLms(srcPixels[i], srcPixels[i + 1], srcPixels[i + 2]);
+    
+            // correct
+            l = lms[0];
+            m = lms[1];
+            s = lms[2];
+            let trans1 = [1 - ddegree/2, ddegree/2, 0];
+            let trans2 = [pdegree/2, 1 - pdegree/2, 0];
+            let trans3 = [pdegree/4, ddegree/4, 1 - (pdegree + ddegree)/4];
+            l_ = l*trans1[0]+m*trans1[1]+s*trans1[2]
+            m_ = l*trans2[0]+m*trans2[1]+s*trans2[2]
+            s_ = l*trans3[0]+m*trans3[1]+s*trans3[2]
+    
+            // convert back to rgb
+            rgb = lmsToRgb(l_, m_, s_);
+    
+            dstPixels[i] = rgb[0];
+            dstPixels[i + 1] = rgb[1];
+            dstPixels[i + 2] = rgb[2];
+            dstPixels[i + 3] = srcPixels[i + 3];
+        }
+    
+        return dstImageData;
+}
 
 module.exports = ImageFilters
