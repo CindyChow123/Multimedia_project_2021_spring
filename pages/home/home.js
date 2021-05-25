@@ -57,7 +57,6 @@ Page({
     }else{
       this.handleImage(Type);
     }
-    
   },
   handleImage: function(Type){
     wx.chooseImage({

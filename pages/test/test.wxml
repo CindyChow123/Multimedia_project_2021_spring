@@ -8,10 +8,10 @@
     <slider min="0" max="100" show-value="true" bindchange="bindSlideChange"></slider>
   </view>
   <text>{{text}}</text>
-  <navigator class="navButton" wx:if="{{finish}}">
-    <button type="primary" plain="true">提交测试</button>
-  </navigator>
-  <navigator class="navButton" wx:else>
-    <button type="primary" plain="true">下一步</button>
-  </navigator>
+  <view class="navButton" wx:if="{{finish}}" >
+    <button type="primary" plain="true"  bindtap="finish">提交测试</button>
+  </view>
+  <view class="navButton" wx:else >
+    <button type="primary" plain="true"  bindtap="next">下一步</button>
+  </view>
 </view>
