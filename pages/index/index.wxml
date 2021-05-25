@@ -1,16 +1,3 @@
-<!--pages/index/index.wxml-->
-<!-- <view class='wrap'>
-    <button bindtap='choose'>choose image</button> -->
-    <!-- <button wx:if="{{selected}}" bindtap='filterTap'>filter</button>
-    <view class='picker-wrap'>
-        <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
-            <view class="picker">
-                点击选择模式：{{array[index]}}
-            </view>
-        </picker>
-    </view>
-    <view class='time' wx:if="{{gap}}">Processing time:{{gap}}ms</view>
-</view> -->
 <view class="transform_wrap">
     <canvas canvas-id='transform' class='transform'></canvas>
 </view>
@@ -21,7 +8,7 @@
                 <text class="img_text">{{item.img_name}}</text>
             </view>
             <view class="img_ctx">
-                <image mode="scaleToFill" src="{{item.img_src}}" class="img" bindtap="bindImgFilter" data-src="{{item.img_src}}"></image> 
+                <image mode="scaleToFill" src="{{item.img_src}}" class="img" bindtap="bindImgFilter" data-src="{{item.img_src}}" data-name="{{item.img_name}}"></image> 
             </view>
         </view>
     </scroll-view>
