@@ -12,9 +12,6 @@
   <navigator class="navButton" url="../../pages/test/test">
     <button type="primary" plain="true">测试</button>
   </navigator>
-  <navigator class="navButton">
-    <button type="primary" plain="true">查看我的测试结果</button>
-  </navigator>
   <view class="navButton">
     <button type="primary" plain="true" bindtap="handleLogout">退出登录</button>
   </view>

@@ -2,6 +2,7 @@
 const text = '请将滑块滑至能看清数字的位置'
 const ImageFilters = require('../../utils/weImageFilters/weImageFilters.js')
 const Helper = require('../../utils/weImageFilters/weImageFiltersHelper.js')
+var degree
 let helper = new Helper({
   canvasId: 'test_pic',
   width: 420,
@@ -50,10 +51,35 @@ Page({
       mask: true
     })
     // console.log("ori:",imageData.data);
-    let transformed = ImageFilters.TritSim(imageData,event.detail.value/100)
+    degree=event.detail.value
+    let transformed = ImageFilters.TritSim(imageData,degree/100)
     // console.log("trans:",transformed.data);
+
     helper.putImageData(transformed,()=>{
       wx.hideLoading()
+    })
+  },
+
+  choose(e) {
+    const Type = e.currentTarget.dataset.type;
+
+    if (Type=="next"){
+      console.log("n");
+      wx.setStorage({
+        data: degree,
+        key: 'degree1:',
+      })
+    }else{
+      console.log("f");
+    }
+  },
+  submitresult: function(){
+
+  },
+
+  next: function name(event) {
+    wx.switchTab({
+      url: '/pages/user/user',
     })
   }
 })
