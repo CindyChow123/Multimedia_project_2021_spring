@@ -1,7 +1,47 @@
 // pages/index/index.js
 const ImageFilters = require('../../utils/weImageFilters/weImageFilters.js')
 const Helper = require('../../utils/weImageFilters/weImageFiltersHelper.js')
-const order = ['demo1', 'demo2', 'demo3']
+const lst1=[
+    {
+      img_id:0,
+      img_src:"../home/img/swipe_ncv.png",
+      img_name:"正常色觉"
+    },
+    {
+      img_id:1,
+      img_src:"../home/img/swipe_acb.png",
+      img_name:"失色症"
+    },
+    {
+      img_id:2,
+      img_src:"../home/img/swipe_dcb.png",
+      img_name:"绿色盲"
+    },
+    {
+      img_id:3,
+      img_src:"../home/img/swipe_pcb.png",
+      img_name:"红色盲"
+    },
+    {
+      img_id:4,
+      img_src:"../home/img/hybrid.png",
+      img_name:"红绿色盲"
+    }
+]
+const lst2=[
+    {
+        img_id:0,
+        img_src:"../home/img/rainbow.png",
+        img_name:"色觉辅助"
+    }
+]
+const lst3=[
+    {
+        img_id:0,
+        img_src:"../home/img/black.png",
+        img_name:"DIY"
+    }
+]
 
 let helper1 = new Helper({
     canvasId: 'transform',
@@ -176,63 +216,39 @@ Page({
         index: 0,
         gap: 0,
         type: "no",
-        img_lst: [
-            {
-              img_id:0,
-              img_src:"../home/img/swipe_ncv.png",
-              img_name:"正常色觉"
-            },
-            {
-              img_id:1,
-              img_src:"../home/img/swipe_acb.png",
-              img_name:"失色症"
-            },
-            {
-              img_id:2,
-              img_src:"../home/img/swipe_dcb.png",
-              img_name:"绿色盲"
-            },
-            {
-              img_id:3,
-              img_src:"../home/img/swipe_pcb.png",
-              img_name:"红色盲"
-            },
-            {
-              img_id:4,
-              img_src:"../home/img/hybrid.png",
-              img_name:"红绿色盲"
-            }
-        ],
+        img_lst:[]
     },
     onLoad: function (options) {
         const z = this;
         this.setData({
-            array: keys
         })
         const eventChann = this.getOpenerEventChannel()
         eventChann.on('getUrl',function(data){
-            // let option = {
-            //     canvasId:'transform',
-            //     width:280,
-            //     height:280*(data.height/data.width)
-            // }
-            // helper1 = new Helper({
-            //     canvasId: 'transform',
-            //     width: 280,
-            //     height: 280*(data.height/data.width)
-            // })
+            if (data.type=="view"){
+                z.setData(
+                    {
+                        array: keys,
+                        img_lst:lst1
+                    }
+                )
+            }else if(data.type=="help"){
+                z.setData(
+                    {
+                        array: keys,
+                        img_lst:lst2
+                    }
+                )
+            }else{
+                z.setData(
+                    {
+                        array: keys,
+                        img_lst:lst3
+                    }
+                )
+            }
             wx.getSystemInfo({
               success: (result) => {
                 console.log("data:",data);
-                // console.log("result:",result);
-                
-                // console.log(option)
-                // helper1.updateCanvasInfo(option) 
-                // z.setData({
-                //     selected: 1,
-                //     type:data.type
-                // })
-                // option.tempFilePath = data.path;
                 helper1.initCanvas(data.path,()=>{
                     z.setData({
                         selected: 1,
@@ -243,6 +259,7 @@ Page({
               },
             }) 
         })
+        console.log(this);
     },
     bindPickerChange(e) {
         const z = this
