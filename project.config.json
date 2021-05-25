@@ -23,7 +23,7 @@
     "compileHotReLoad": false,
     "useMultiFrameRuntime": true,
     "useApiHook": true,
-    "useApiHostProcess": false,
+    "useApiHostProcess": true,
     "babelSetting": {
       "ignore": [],
       "disablePlugins": [],
@@ -41,7 +41,7 @@
   },
   "compileType": "miniprogram",
   "libVersion": "2.7.7",
-  "appid": "wx045dbd80bfe7243a",
+  "appid": "wx38bc483b80da85ae",
   "projectname": "Viqual",
   "debugOptions": {
     "hidedInDevtools": []
