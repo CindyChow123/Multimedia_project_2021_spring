@@ -24,15 +24,15 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    picNum=0
+    picNum=1
     wx.getSystemInfo({
       success: (result) => {
         const syswid=result.windowWidth;
         wx.getImageInfo({
-          src: "icon/CBT0.jpg",
+          src: "icon/CBT1.jpg",
           success (res) {
             res.canvasId = 'test_pic';
-            res.tempFilePath = "icon/CBT0.jpg",
+            res.tempFilePath = "icon/CBT1.jpg",
             res.height=Math.floor(syswid*(res.height/res.width))
             res.width=syswid;
             // console.log(res);
