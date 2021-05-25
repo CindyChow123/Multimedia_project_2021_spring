@@ -1,4 +1,11 @@
 // pages/home/home.js
+
+const Helper = require('../../utils/weImageFilters/weImageFiltersHelper.js')
+let helper = new Helper({
+  canvasId: 'test_pic',
+  width: 420,
+  height: 420
+})
 Page({
 
   /**
@@ -67,7 +74,7 @@ Page({
                   wx.navigateTo({
                     url: '/pages/index/index',
                     success: function(res) {
-                      res.eventChannel.emit('getUrl',{path:img.path,width:img.width,height:img.height,type:Type});
+                      
                     },
                     fail: function(res){
                       console.log('Choose Picture Fail!')
