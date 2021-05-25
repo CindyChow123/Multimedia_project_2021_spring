@@ -24,6 +24,29 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    picNum=0
+    wx.getSystemInfo({
+      success: (result) => {
+        const syswid=result.windowWidth;
+        wx.getImageInfo({
+          src: "icon/CBT0.jpg",
+          success (res) {
+            res.canvasId = 'test_pic';
+            res.tempFilePath = "icon/CBT0.jpg",
+            res.height=Math.floor(syswid*(res.height/res.width))
+            res.width=syswid;
+            // console.log(res);
+            helper.updateCanvasInfo(res);
+            // console.log(helper);
+          }
+        })
+      },
+    })
+    // let path = "icon/colorBlindTest.jpg"
+    // helper.initCanvas(path)
+  },
+
+  refresh: function (options) {
     wx.getSystemInfo({
       success: (result) => {
         const syswid=result.windowWidth;
@@ -88,17 +111,19 @@ Page({
       method: 'POST'
     })
 
-    picNum+=1
-    this.onLoad()
-    if (picNum==5){
+
+    if (picNum>=4){
       wx.showLoading({
         title: '正在分析',
       })
       wx.hideLoading()
+      
       wx.switchTab({
         url: '/pages/user/user'
       })
     }
+    picNum+=1
+    this.refresh()
   },
 
   finish: function name(params) {
