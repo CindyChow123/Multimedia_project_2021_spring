@@ -102,13 +102,11 @@ Page({
       }
     })
     wx.request({
-      url: 'https://10.21.106.146:7120/polls/storeTestDegree/',
-      data: {
-        userId: nickName,
-        testType: picNum,
-        degrees: storeTestDegree
-      },
-      method: 'POST'
+      url: 'https://10.21.106.146:7120/polls/storeTestDegree?userId='+nickName+'&testType='+picNum+'&degrees='+storeTestDegree,
+      method: 'GET',
+      success(res){
+        console.log(res.data)
+      }
     })
 
 
