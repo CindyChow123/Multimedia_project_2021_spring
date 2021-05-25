@@ -3,10 +3,10 @@ const ImageFilters = require('../../utils/weImageFilters/weImageFilters.js')
 const Helper = require('../../utils/weImageFilters/weImageFiltersHelper.js')
 const order = ['demo1', 'demo2', 'demo3']
 
-let helper = new Helper({
+let helper1 = new Helper({
     canvasId: 'transform',
-    width: 320,
-    height: 320
+    width: 280,
+    height: 520
 })
 
 const filters = {
@@ -196,6 +196,11 @@ Page({
               img_id:3,
               img_src:"../home/img/swipe_pcb.png",
               img_name:"红色盲"
+            },
+            {
+              img_id:4,
+              img_src:"../home/img/hybrid.png",
+              img_name:"红绿色盲"
             }
         ],
     },
@@ -206,21 +211,33 @@ Page({
         })
         const eventChann = this.getOpenerEventChannel()
         eventChann.on('getUrl',function(data){
+            // let option = {
+            //     canvasId:'transform',
+            //     width:280,
+            //     height:280*(data.height/data.width)
+            // }
+            // helper1 = new Helper({
+            //     canvasId: 'transform',
+            //     width: 280,
+            //     height: 280*(data.height/data.width)
+            // })
             wx.getSystemInfo({
               success: (result) => {
-                // console.log("data:",data);
+                console.log("data:",data);
                 // console.log("result:",result);
-                const option = {
-                    tempFilePath:data.path,
-                    canvasId:'transform',
-                    width:280,
-                    height:280*(result.screenHeight/result.screenWidth)
-                }
+                
                 // console.log(option)
-                helper.updateCanvasInfo(option) 
-                z.setData({
-                    selected: 1,
-                    type:data.type
+                // helper1.updateCanvasInfo(option) 
+                // z.setData({
+                //     selected: 1,
+                //     type:data.type
+                // })
+                // option.tempFilePath = data.path;
+                helper1.initCanvas(data.path,()=>{
+                    z.setData({
+                        selected: 1,
+                        type: data.type
+                    })
                 })
                 // console.log("after:",z.data.type);
               },
@@ -239,10 +256,10 @@ Page({
             mask: true
         })
         let startTime = (new Date()).getTime()
-        let imageData = helper.createImageData()
+        let imageData = helper1.createImageData()
         let filtered = filters[keys[index]](imageData)
 
-        helper.putImageData(filtered, () => {
+        helper1.putImageData(filtered, () => {
             wx.hideLoading()
 
             let endTime = (new Date()).getTime()
@@ -264,7 +281,7 @@ Page({
 
                     // z.getImageAspectFitSize(path)
 
-                    helper.initCanvas(path, () => {
+                    helper1.initCanvas(path, () => {
                         z.setData({
                             selected: 1
                         })
@@ -281,7 +298,7 @@ Page({
                 scope: 'scope.writePhotosAlbum',
                     success (res) {
                         console.log("save suc:",res)
-                        helper.getImageTempFilePath(tempFilePath => {
+                        helper1.getImageTempFilePath(tempFilePath => {
                             // console.log(tempFilePath);
                             // 保存到相册
                             wx.saveImageToPhotosAlbum({
@@ -339,15 +356,42 @@ Page({
             mask: true
         })
         let path = e.currentTarget.dataset.src;
-        wx.getImageInfo({
-          src: path,
-          success (res) {
-              helper.updateCanvasInfo({tempFilePath:path});
-              wx.hideLoading();
-          },
-          fail (res) {
-              console.log('Fail to get Image Infomation.')
-          }
+        let name = e.currentTarget.dataset.name;
+        // wx.getImageInfo({
+        //   src: path,
+        //   success (res) {
+        //       helper1.updateCanvasInfo({tempFilePath:path});
+        //       wx.hideLoading();
+        //   },
+        //   fail (res) {
+        //       console.log('Fail to get Image Infomation.')
+        //   }
+        // })
+        let imageData = helper1.createImageData()
+        // console.log(imageData);
+        let trans = imageData;
+        switch(name)
+        {
+            case "正常色觉":
+                break;
+            case "绿色盲":
+                trans = ImageFilters.DeutSim(imageData,0.9)
+                break;
+            case "红色盲":
+                trans = ImageFilters.ProtSim(imageData,0.9)
+                break;
+            case "红绿色盲":
+                trans = ImageFilters.DPSim(imageData,0.9,0.9)
+                break;
+            case "失色症":
+                trans = filters['GrayScale'](imageData)
+                break;
+            default:
+                console.log('Not Found!')
+        }
+        // console.log(trans);
+        helper1.putImageData(trans,()=>{
+            wx.hideLoading()
         })
     }
 })

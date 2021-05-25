@@ -50,7 +50,7 @@ Page({
       mask: true
     })
     // console.log("ori:",imageData.data);
-    let transformed = ImageFilters.TritSim(imageData,event.detail.value/100)
+    let transformed = ImageFilters.DPSim(imageData,event.detail.value/100,0.9)
     // console.log("trans:",transformed.data);
     helper.putImageData(transformed,()=>{
       wx.hideLoading()

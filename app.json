@@ -2,10 +2,7 @@
   "pages":[
     "pages/home/home",
     "pages/index/index",
-    "pages/ripple/ripple",
     "pages/user/user",
-    "pages/shot/shot",
-    "pages/confirm/confirm",
     "pages/test/test",
     "pages/logs/logs"
   ],
