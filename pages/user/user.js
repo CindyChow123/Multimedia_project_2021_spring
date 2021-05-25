@@ -7,6 +7,14 @@ Page({
   data: {
     userinfo:{}
   },
+  onLoad(){
+    let temp = wx.getStorageSync('userInfo');
+    if (temp) {
+      this.setData({
+        userinfo:temp
+      })
+    }
+  },
   handleGetUserInfo(e){
     // console.log(e);
     const {userInfo} = e.detail;
@@ -42,11 +50,13 @@ Page({
     this.setData({userinfo});
   },
   handleLogout(){
-    wx.removeStorage({
-      key: 'userInfo',
-    })
-    this.setData({
-      userinfo: null
+    const z = this;
+    wx.clearStorage({
+      success: (res) => {
+        z.setData({
+          userinfo: null
+        })
+      },
     })
   }
 })

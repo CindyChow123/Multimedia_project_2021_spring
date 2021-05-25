@@ -76,13 +76,16 @@ Page({
   },
 
   bindSlideChange: function(event) {
+    degree=event.detail.value;
     // console.log(helper)
+    this.setData({
+      s_degree: degree
+    })
     let imageData = helper.createImageData()
     wx.showLoading({
       title: '正在加载...',
       mask: true
     })
-    degree=event.detail.value;
     // console.log("ori:",imageData.data);
     let transformed;
     if (picNum==1) {
@@ -98,6 +101,7 @@ Page({
   next: function name(params) {
     var storeTestDegree=new Array()
     let degree = this.data.s_degree;
+    console.log("deg:",degree)
     switch(picNum){
       case 1:storeTestDegree=[degree,0,0];
       case 2:storeTestDegree=[0,degree,0];

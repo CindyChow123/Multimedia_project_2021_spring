@@ -403,6 +403,14 @@ Page({
             case "失色症":
                 trans = filters['GrayScale'](imageData)
                 break;
+            case "色觉辅助":
+                let degree1,degree2;
+                degree1 = wx.getStorageSync('degree0');
+                degree2 = wx.getStorageSync('degree1');
+                console.log(degree2)
+                console.log(degree1)
+                trans = ImageFilters.Correct(imageData,degree1/100.0,degree2/100.0)
+                break;
             default:
                 console.log('Not Found!')
         }
