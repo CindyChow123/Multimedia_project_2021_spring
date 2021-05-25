@@ -5,7 +5,7 @@
     </canvas>
   </view>
   <view class="viewSlider">
-    <slider min="0" max="100" show-value="true" bindchange="bindSlideChange" ></slider>
+    <slider min="0" max="100" show-value="true" bindchange="bindSlideChange" value="{{s_degree}}"></slider>
   </view>
   <text>{{text}}</text>
   <view class="navButton" wx:if="{{finish}}" >

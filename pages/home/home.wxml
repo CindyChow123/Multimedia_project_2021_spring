@@ -12,10 +12,10 @@
   <view class="navButton">
       <button bindtap='choose' class="choose_button" type="primary" plain="true" data-type="view">预设色觉体验</button>
   </view>
-  <view class="navButton" style="top: 58%">
+  <!-- <view class="navButton" style="top: 58%">
       <button bindtap='choose' class="choose_button" type="primary" plain="true" data-type="diy">自定色觉体验</button>
-  </view>
-  <view class="navButton" style="top: 71%">
+  </view> -->
+  <view class="navButton" style="top: 58%">
       <button bindtap='choose' class="choose_button" type="primary" plain="true" data-type="help">自动色觉增强</button>
   </view>
 </view>

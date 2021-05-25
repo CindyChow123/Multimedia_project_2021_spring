@@ -16,14 +16,16 @@ Page({
    */
   data: {
     text,
-    finish: false
-    
+    finish: false,
+    img_data:null,
+    s_degree:0
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    const z = this;
     picNum=1
     wx.getSystemInfo({
       success: (result) => {
@@ -37,6 +39,11 @@ Page({
             res.width=syswid;
             // console.log(res);
             helper.updateCanvasInfo(res);
+            helper.saveImageData();
+            // let idata = helper.createImageData()
+            // z.setData({
+            //   img_data: idata
+            // })
             // console.log(helper);
           }
         })
@@ -69,7 +76,7 @@ Page({
   },
 
   bindSlideChange: function(event) {
-    // console.log(event)
+    // console.log(helper)
     let imageData = helper.createImageData()
     wx.showLoading({
       title: '正在加载...',
@@ -77,7 +84,12 @@ Page({
     })
     degree=event.detail.value;
     // console.log("ori:",imageData.data);
-    let transformed = ImageFilters.DPSim(imageData,degree/100.0,0.9)
+    let transformed;
+    if (picNum==1) {
+      transformed = ImageFilters.Correct(imageData,degree/100.0,0)
+    }else{
+      transformed = ImageFilters.Correct(imageData,0,degree/100.0)
+    }
     // console.log("trans:",transformed.data);
     helper.putImageData(transformed,()=>{
       wx.hideLoading()
@@ -85,6 +97,7 @@ Page({
   },
   next: function name(params) {
     var storeTestDegree=new Array()
+    let degree = this.data.s_degree;
     switch(picNum){
       case 1:storeTestDegree=[degree,0,0];
       case 2:storeTestDegree=[0,degree,0];
@@ -112,18 +125,23 @@ Page({
     })
 
 
-    if (picNum>=4){
+    if (picNum>=2){
       wx.showLoading({
         title: '正在分析',
       })
       wx.hideLoading()
-      
+      wx.showModal({
+        title: '测试完成！',
+      })
       wx.switchTab({
         url: '/pages/user/user'
       })
     }
     picNum+=1
     this.refresh()
+    this.setData({
+      s_degree:0
+    })
   },
 
   finish: function name(params) {
