@@ -119,7 +119,7 @@ Page({
       }
     })
     wx.request({
-      url: 'https://kxlv.ltd:7120/polls/storeTestDegree?userId='+nickName+'&testType='+picNum+'&degrees='+storeTestDegree,
+      url: 'https://example.com/polls/storeTestDegree?userId='+nickName+'&testType='+picNum+'&degrees='+storeTestDegree,
       method: 'GET',
       success(res){
         console.log(res.data)

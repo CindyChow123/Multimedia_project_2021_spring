@@ -24,7 +24,7 @@ Page({
     })
 
     wx.request({
-      url: 'https://kxlv.ltd:7120/polls/getUserFilterParams?userId='+userInfo.nickName, //仅为示例，并非真实的接口地址
+      url: 'https://example.com/polls/getUserFilterParams?userId='+userInfo.nickName, //仅为示例，并非真实的接口地址
       success (res) {
         console.log(userInfo.nickName)
         console.log(res.data)
