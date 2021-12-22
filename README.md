@@ -6,5 +6,5 @@ In the course of Multimedia Information Processing, we built this Weixin Mini pr
 ✔ Advocate public empathy for color blind people  
 ## Video Demonstration
 <video width="320" height="240" controls>
-  <source src="video/video.mov" type="video/mp4">
+  <source src="video_edited.mov" type="video/mp4">
 </video>
